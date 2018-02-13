@@ -1,9 +1,5 @@
 'use strict';
 
-// TODO - make image show only once at a time, use while loop?
-
-////////////Constructor///////////////
-
 function Product (name, filepath) {
     this.name = name;
     this.filepath = filepath;
@@ -60,7 +56,7 @@ const researchStudy = {
     }
 }
 
-Product.prototype.render = function () { // render = shows on screen
+Product.prototype.render = function () {
     const ele = document.createElement('img');
     ele.src = this.filepath;
     ele.setAttribute('alt', this.name);
