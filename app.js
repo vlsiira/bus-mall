@@ -1,8 +1,6 @@
 'use strict';
 
-// TODO - get 3 images to show
-//      - randomize them
-//      - make no image show more than once in group of 3
+// TODO - make image show only once at a time, use while loop?
 
 ////////////Constructor///////////////
 
@@ -51,10 +49,12 @@ const researchStudy = {
         }
     },
     getRandomProducts: function () {
-        for (let i = 0; i < 3; i++) {
+        while (this.selectedProducts.length < 3) {
             const randomNumber = Math.floor(Math.random() * this.products.length);
             const product = this.products[randomNumber];
-            this.selectedProducts.push(product);
+            if (!this.selectedProducts.includes(product)) {
+                this.selectedProducts.push(product);
+            }
         }
         console.table(this.selectedProducts);
     }
