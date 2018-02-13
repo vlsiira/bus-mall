@@ -1,8 +1,8 @@
 'use strict';
 
-// TODO - make constructor function
-//      - create properties- name, filepath, times shown, times clicked, string id
-//      - make instances of each object
+// TODO - get 3 images to show
+//      - randomize them
+//      - make no image show more than once in group of 3
 
 ////////////Constructor///////////////
 
@@ -15,6 +15,7 @@ function Product (name, filepath) {
 
 const researchStudy = {
     products: [],
+    selectedProducts: [],
     start: function () {
 
         this.products.push(
@@ -39,13 +40,23 @@ const researchStudy = {
             new Product('water-can', 'img/water-can.jpg'),
             new Product('wine-glass', 'img/wine-glass.jpg'),
         );
+        this.getRandomProducts();
         this.showProducts();
     },
+
     showProducts: function () {
         const div = document.getElementById('container');
-        for (let i = 0; i < this.products.length; i++) {
-            div.appendChild(this.products[i].render());
+        for (let i = 0; i < this.selectedProducts.length; i++) {
+            div.appendChild(this.selectedProducts[i].render());
         }
+    },
+    getRandomProducts: function () {
+        for (let i = 0; i < 3; i++) {
+            const randomNumber = Math.floor(Math.random() * this.products.length);
+            const product = this.products[randomNumber];
+            this.selectedProducts.push(product);
+        }
+        console.table(this.selectedProducts);
     }
 }
 
