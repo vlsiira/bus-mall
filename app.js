@@ -1,0 +1,66 @@
+'use strict';
+
+function Product (name, filepath) {
+    this.name = name;
+    this.filepath = filepath;
+    this.timesShown = 0;
+    this.timesClicked = 0;
+}
+
+const researchStudy = {
+    products: [],
+    selectedProducts: [],
+    start: function () {
+
+        this.products.push(
+            new Product('bag', 'img/bag.jpg'),
+            new Product('banana', 'img/banana.jpg'),
+            new Product('bathroom', 'img/bathroom.jpg'),
+            new Product('boots', 'img/boots.jpg'),
+            new Product('breakfast', 'img/breakfast.jpg'),
+            new Product('bubblegum', 'img/bubblegum.jpg'),
+            new Product('chair', 'img/chair.jpg'),
+            new Product('cthulhu', 'img/cthulhu.jpg'),
+            new Product('dog-duck', 'img/dog-duck.jpg'),
+            new Product('dragon', 'img/dragon.jpg'),
+            new Product('pen', 'img/pen.jpg'),
+            new Product('pet-sweep', 'img/pet-sweep.jpg'),
+            new Product('scissors', 'img/scissors.jpg'),
+            new Product('shark', 'img/shark.jpg'),
+            new Product('sweep', 'img/sweep.png'),
+            new Product('tauntaun', 'img/tauntaun.jpg'),
+            new Product('unicorn', 'img/unicorn.jpg'),
+            new Product('usb', 'img/usb.gif'),
+            new Product('water-can', 'img/water-can.jpg'),
+            new Product('wine-glass', 'img/wine-glass.jpg'),
+        );
+        this.getRandomProducts();
+        this.showProducts();
+    },
+
+    showProducts: function () {
+        const div = document.getElementById('container');
+        for (let i = 0; i < this.selectedProducts.length; i++) {
+            div.appendChild(this.selectedProducts[i].render());
+        }
+    },
+    getRandomProducts: function () {
+        while (this.selectedProducts.length < 3) {
+            const randomNumber = Math.floor(Math.random() * this.products.length);
+            const product = this.products[randomNumber];
+            if (!this.selectedProducts.includes(product)) {
+                this.selectedProducts.push(product);
+            }
+        }
+        console.table(this.selectedProducts);
+    }
+}
+
+Product.prototype.render = function () {
+    const ele = document.createElement('img');
+    ele.src = this.filepath;
+    ele.setAttribute('alt', this.name);
+    return ele;
+};
+
+researchStudy.start();
