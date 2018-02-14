@@ -7,6 +7,13 @@ function Product (name, filepath) {
     this.timesClicked = 0;
 }
 
+Product.prototype.render = function () {
+    const ele = document.createElement('img');
+    ele.src = this.filepath;
+    ele.setAttribute('alt', this.name);
+    return ele;
+};
+
 const researchStudy = {
     products: [],
     selectedProducts: [],
@@ -34,33 +41,56 @@ const researchStudy = {
             new Product('water-can', 'img/water-can.jpg'),
             new Product('wine-glass', 'img/wine-glass.jpg'),
         );
+        
         this.getRandomProducts();
+        this.clearBoard();
         this.showProducts();
+        
+        const container = document.getElementById('container');
+        container.addEventListener('click', function() {
+            console.log('was clicked', event.target);
+            
+            const alt = event.target.alt;
+            for (let i = 0; i < researchStudy.products.length; i++) {
+                const product = researchStudy.products[i];
+                
+                console.log("alt ", alt);
+                
+                if (alt === product.name) {
+                    product.timesClicked++;
+                    console.table(product);
+                }
+            }
+        });
+        
     },
-
     showProducts: function () {
         const div = document.getElementById('container');
         for (let i = 0; i < this.selectedProducts.length; i++) {
             div.appendChild(this.selectedProducts[i].render());
         }
     },
+    
     getRandomProducts: function () {
         while (this.selectedProducts.length < 3) {
             const randomNumber = Math.floor(Math.random() * this.products.length);
             const product = this.products[randomNumber];
             if (!this.selectedProducts.includes(product)) {
+                product.timesShown++;
+                console.log('product',product);
                 this.selectedProducts.push(product);
             }
         }
         console.table(this.selectedProducts);
+    },
+    
+    // after click, 3 new random images
+    //     - call random in click fx?
+    clearBoard: function () {
+        const div = document.getElementById('container');
+        div.textContent = '';
+        console.log('test', div.textContent);
     }
 }
-
-Product.prototype.render = function () {
-    const ele = document.createElement('img');
-    ele.src = this.filepath;
-    ele.setAttribute('alt', this.name);
-    return ele;
-};
 
 researchStudy.start();
