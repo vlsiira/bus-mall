@@ -16,9 +16,8 @@ Product.prototype.render = function () {
 
 const researchStudy = {
     products: [],
-    selectedProducts: [],
     start: function () {
-
+        
         this.products.push(
             new Product('bag', 'img/bag.jpg'),
             new Product('banana', 'img/banana.jpg'),
@@ -44,7 +43,8 @@ const researchStudy = {
         
         this.getRandomProducts();
         this.clearBoard();
-        this.showProducts();
+        //this.showProducts();
+        //researchStudy.getRandomProducts();
         
         const container = document.getElementById('container');
         container.addEventListener('click', function() {
@@ -64,24 +64,25 @@ const researchStudy = {
         });
         
     },
-    showProducts: function () {
-        const div = document.getElementById('container');
-        for (let i = 0; i < this.selectedProducts.length; i++) {
-            div.appendChild(this.selectedProducts[i].render());
-        }
-    },
     
+    // showProducts: function () {
+    //     const div = document.getElementById('container');
+    //     for (let i = 0; i < selectedProducts.length; i++) {
+    //         div.appendChild(selectedProducts[i].render());
+    //     }
+    // },
     getRandomProducts: function () {
-        while (this.selectedProducts.length < 3) {
+        const selectedProducts = [];
+        while (selectedProducts.length < 3) {
             const randomNumber = Math.floor(Math.random() * this.products.length);
             const product = this.products[randomNumber];
-            if (!this.selectedProducts.includes(product)) {
+            if (!selectedProducts.includes(product)) {
                 product.timesShown++;
                 console.log('product',product);
-                this.selectedProducts.push(product);
+                selectedProducts.push(product);
             }
         }
-        console.table(this.selectedProducts);
+        console.table(selectedProducts);
     },
     
     // after click, 3 new random images
@@ -94,3 +95,42 @@ const researchStudy = {
 }
 
 researchStudy.start();
+
+//////////chart//////////
+var ctx = document.getElementById("chart");
+var chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
