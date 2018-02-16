@@ -51,6 +51,7 @@ const researchStudy = {
     },
 
     getRandomProducts: function () {
+        this.selectedProducts = [];
         while (this.selectedProducts.length < 3) {
             const randomNumber = Math.floor(Math.random() * this.products.length);
             const product = this.products[randomNumber];
@@ -59,8 +60,8 @@ const researchStudy = {
                 this.selectedProducts.push(product);
             }
         }
-        return this.selectedProducts;
         console.table(this.selectedProducts);
+        return this.selectedProducts;
     },
 
     showProducts: function () {
@@ -73,6 +74,7 @@ const researchStudy = {
     clearBoard: function () {
         const div = document.getElementById('container');
         div.textContent = '';
+        console.log('clear board');
     }
 }
 
@@ -93,7 +95,6 @@ function handleClicks() {
     researchStudy.getRandomProducts();
     researchStudy.showProducts();
     
-    console.log('click test', researchStudy.clearBoard());
 }
 
 researchStudy.start();
