@@ -83,7 +83,13 @@ function handleClicks() {
     
     const alt = event.target.alt;
 
-    boardClicked++;
+    if (boardClicked < 26) {
+        boardClicked++;
+        console.log('clicked less than 26');
+    } else {
+        console.log('please clear board')
+        researchStudy.clearBoard();
+    }
     
     for (let i = 0; i < researchStudy.products.length; i++) {
         const product = researchStudy.products[i];
@@ -92,19 +98,7 @@ function handleClicks() {
             product.timesClicked++;
             console.table(product);
         }
-        
     }
-
-    // if (alt < 26) {
-    //     product.boardClicked++;
-    // }
-    
-    // boardClicked++;
-    // if (this.researchStudy.boardClicked < 26) {
-    //     render();
-    // } else {
-    //     clearBoard();
-    // }
 
     researchStudy.clearBoard();
     researchStudy.getRandomProducts();
