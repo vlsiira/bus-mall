@@ -5,6 +5,7 @@ function Product (name, filepath) {
     this.filepath = filepath;
     this.timesShown = 0;
     this.timesClicked = 0;
+    
 }
 
 Product.prototype.render = function () {
@@ -60,7 +61,7 @@ const researchStudy = {
                 this.selectedProducts.push(product);
             }
         }
-        console.table(this.selectedProducts);
+        //console.table(this.selectedProducts);
         return this.selectedProducts;
     },
 
@@ -74,13 +75,15 @@ const researchStudy = {
     clearBoard: function () {
         const div = document.getElementById('container');
         div.textContent = '';
-        console.log('clear board');
     }
 }
 
+let boardClicked = 0;
 function handleClicks() {
-    console.log('was clicked', event.target);
+    
     const alt = event.target.alt;
+
+    boardClicked++;
     
     for (let i = 0; i < researchStudy.products.length; i++) {
         const product = researchStudy.products[i];
@@ -89,7 +92,19 @@ function handleClicks() {
             product.timesClicked++;
             console.table(product);
         }
+        
     }
+
+    // if (alt < 26) {
+    //     product.boardClicked++;
+    // }
+    
+    // boardClicked++;
+    // if (this.researchStudy.boardClicked < 26) {
+    //     render();
+    // } else {
+    //     clearBoard();
+    // }
 
     researchStudy.clearBoard();
     researchStudy.getRandomProducts();
