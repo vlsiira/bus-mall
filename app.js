@@ -81,6 +81,10 @@ const researchStudy = {
 let boardClicked = 0;
 function handleClicks() {
     
+    researchStudy.clearBoard();
+    researchStudy.getRandomProducts();
+    researchStudy.showProducts();
+    
     const alt = event.target.alt;
 
     if (boardClicked < 26) {
@@ -100,9 +104,6 @@ function handleClicks() {
         }
     }
 
-    researchStudy.clearBoard();
-    researchStudy.getRandomProducts();
-    researchStudy.showProducts();
     
 }
 
