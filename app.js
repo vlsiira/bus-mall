@@ -61,7 +61,6 @@ const researchStudy = {
                 this.selectedProducts.push(product);
             }
         }
-        //console.table(this.selectedProducts);
         return this.selectedProducts;
     },
 
@@ -80,7 +79,7 @@ const researchStudy = {
 
 let boardClicked = 0;
 function handleClicks() {
-    
+
     researchStudy.clearBoard();
     researchStudy.getRandomProducts();
     researchStudy.showProducts();
@@ -89,22 +88,23 @@ function handleClicks() {
 
     if (boardClicked < 26) {
         boardClicked++;
-        console.log('clicked less than 26');
     } else {
-        console.log('please clear board')
         researchStudy.clearBoard();
+        const list = document.getElementById('list');
+        for (let i = 0; i < researchStudy.products.length; i++) {
+            const liEle = document.createElement('li');
+            liEle.textContent = researchStudy.products[i].timesClicked + ' votes for ' + researchStudy.products[i].name;
+            list.appendChild(liEle);
+        }
     }
     
     for (let i = 0; i < researchStudy.products.length; i++) {
         const product = researchStudy.products[i];
-                
+        
         if (alt === product.name) {
             product.timesClicked++;
-            console.table(product);
         }
     }
-
-    
 }
 
 researchStudy.start();
