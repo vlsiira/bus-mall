@@ -5,6 +5,7 @@ function Product (name, filepath) {
     this.filepath = filepath;
     this.timesShown = 0;
     this.timesClicked = 0;
+    
 }
 
 Product.prototype.render = function () {
@@ -51,6 +52,7 @@ const researchStudy = {
     },
 
     getRandomProducts: function () {
+        this.selectedProducts = [];
         while (this.selectedProducts.length < 3) {
             const randomNumber = Math.floor(Math.random() * this.products.length);
             const product = this.products[randomNumber];
@@ -60,7 +62,6 @@ const researchStudy = {
             }
         }
         return this.selectedProducts;
-        console.table(this.selectedProducts);
     },
 
     showProducts: function () {
@@ -76,24 +77,34 @@ const researchStudy = {
     }
 }
 
+let boardClicked = 0;
 function handleClicks() {
-    console.log('was clicked', event.target);
-    const alt = event.target.alt;
-    
-    for (let i = 0; i < researchStudy.products.length; i++) {
-        const product = researchStudy.products[i];
-                
-        if (alt === product.name) {
-            product.timesClicked++;
-            console.table(product);
-        }
-    }
 
     researchStudy.clearBoard();
     researchStudy.getRandomProducts();
     researchStudy.showProducts();
     
-    console.log('click test', researchStudy.clearBoard());
+    const alt = event.target.alt;
+
+    if (boardClicked < 26) {
+        boardClicked++;
+    } else {
+        researchStudy.clearBoard();
+        const list = document.getElementById('list');
+        for (let i = 0; i < researchStudy.products.length; i++) {
+            const liEle = document.createElement('li');
+            liEle.textContent = researchStudy.products[i].timesClicked + ' votes for ' + researchStudy.products[i].name;
+            list.appendChild(liEle);
+        }
+    }
+    
+    for (let i = 0; i < researchStudy.products.length; i++) {
+        const product = researchStudy.products[i];
+        
+        if (alt === product.name) {
+            product.timesClicked++;
+        }
+    }
 }
 
 researchStudy.start();
