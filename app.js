@@ -46,6 +46,20 @@ const researchStudy = {
         this.getRandomProducts();
         this.showProducts();
         
+        const canvas = document.getElementById('chart');
+        const ctx = canvas.getContext('2d');
+        ctx.fillstyle = 'blue';
+        ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        
+        setInterval(draw, 1000);
+        
+        function draw () {
+            ctx.fillstyle = 'blue';
+            ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        }
+
+
+        
         const container = document.getElementById('container');
         container.addEventListener('click', handleClicks);
         
