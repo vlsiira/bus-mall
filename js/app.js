@@ -18,6 +18,7 @@ Product.prototype.render = function () {
 const researchStudy = {
     products: [],
     selectedProducts: [],
+    productsClicked: [],
     start: function () {
 
         this.products.push(
@@ -128,13 +129,23 @@ const researchStudy = {
 
     end: function () {
         var ctx = document.getElementById("chart").getContext('2d');
+
+        const names = [];
+        //const timesClicked = [];
+        for (let i = 0; i < this.products.length; i++) {
+            names.push(this.products[i].name);
+            
+        }
+
+        //console.log('times clicked', timesClicked);
+
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                labels: names,
                 datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
+                    label: '# of Clicks',
+                    data: this.productsClicked,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -219,6 +230,7 @@ function handleClicks() {
         
         if (alt === product.name) {
             product.timesClicked++;
+            researchStudy.productsClicked.push(product.timesClicked);
         }
     }
 }
