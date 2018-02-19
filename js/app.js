@@ -18,7 +18,6 @@ Product.prototype.render = function () {
 const researchStudy = {
     products: [],
     selectedProducts: [],
-    //productsClicked: [],
     start: function () {
 
         this.products.push(
@@ -49,83 +48,7 @@ const researchStudy = {
         
         const container = document.getElementById('container');
         container.addEventListener('click', handleClicks);
-        
-        //console.log('draw function working?')
-        
-        // for (let t = 0; t < 5; t++) {
-            //     const randomSize = Math.floor(Math.random() * t * 10);
-            //     for (let i = 0; i < 3; i++) {
-                //         const randomX = Math.floor(Math.random() * (700 - 100));
-                //         ctx.beginPath();
-                //         ctx.ellipse(randomX, ctx.canvas.height - t * 70, randomSize, randomSize, 45 * Math.PI/180, 0, 2 * Math.PI);
-                //         ctx.strokeStyle = 'white';
-                //         ctx.stroke();
-                //     };
-                // }
-        // const canvas = document.getElementById('chart');  **sec
-        // const ctx = canvas.getContext('2d');
-        // //ctx.fillstyle = 'blue';
-        // ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-        
-        // setInterval(draw, 1000);  **sec
-
-        //function draw () {
-            //ctx.fillstyle = 'blue';
-            //ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-            //this.end();
-        //}
     },
-
-    // draw: function () {
-    //     ctx.fillstyle = 'blue';
-    //     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    //     this.end();
-    // },
-
-    // end: function () {
-    //     //this.researchStudy.removeEventListener('click', handleClicks);
-    //     //this.board.classList.add('game-over');
-    //     this.drawChart();
-    //     console.log('calling drawChart in end function');
-    // },
-    // drawChart: function () {
-    //     // get the canvas to show chart
-    //     const chartCanvas = document.getElementById('chart');
-    //     const chartCtx = chartCanvas.getContext('2d');
-
-
-    //     // todo create arrays with just names and just timesClicked
-    //     const names = [];
-    //     const timesClicked = [];
-    //     for(let i = 0; i < this.products.length; i ++) {
-    //         names.push(this.products[i].name);
-    //         timesClicked.push(this.products[i].timesClicked);
-    //     }
-
-    //     console.log('names');
-    //     console.log('timesClicked', timesClicked);
-
-    //     const chart = new Chart(chartCtx, { // eslint-disable-line
-    //         type: 'bar',
-    //         data: {
-    //             labels: names,
-    //             datasets: [{
-    //                 label: 'number of times clicked',
-    //                 data: timesClicked
-    //             }]
-    //         },
-    //         options: {
-    //             scales: {
-    //                 yAxes: [{
-    //                     ticks: {
-    //                         beginAtZero:true
-    //                     }
-    //                 }]
-    //             }
-    //         }
-    //     });
-
-    // },
 
     end: function () {
         var ctx = document.getElementById("chart").getContext('2d');
@@ -136,8 +59,6 @@ const researchStudy = {
             names.push(this.products[i].name);
             productsClicked.push(researchStudy.products[i].timesClicked);
         }
-
-        //console.log('times clicked', timesClicked);
 
         var myChart = new Chart(ctx, {
             type: 'bar',
@@ -217,10 +138,6 @@ function handleClicks() {
         boardClicked++;
     } else {
         researchStudy.clearBoard();
-        // for (let i = 0; i < researchStudy.products.length; i++) {
-        //     researchStudy.productsClicked.push(product.timesClicked);
-        // }
-
         const list = document.getElementById('list');
         for (let i = 0; i < researchStudy.products.length; i++) {
             const liEle = document.createElement('li');
@@ -234,8 +151,6 @@ function handleClicks() {
         
         if (alt === product.name) {
             product.timesClicked++;
-            //console.log('product clicked', product.timesClicked);
-            //console.log('product pushed into array', researchStudy.productsClicked);
         }
     }
 }
