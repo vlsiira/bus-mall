@@ -51,14 +51,25 @@ const researchStudy = {
     },
 
     end: function () {
+
         var ctx = document.getElementById("chart").getContext('2d');
 
         const names = [];
         const productsClicked = [];
+        console.log(productsClicked);
         for (let i = 0; i < this.products.length; i++) {
             names.push(this.products[i].name);
             productsClicked.push(researchStudy.products[i].timesClicked);
         }
+
+        // if (localStorage.getItem('products')) {
+        //     let oldPlayCount = localStorage.getItem('products');
+        //     oldPlayCount++;
+        //     localStorage.setItem('products', oldPlayCount);
+        //     //console.log(oldPlayCount);
+        // } else {
+            localStorage.setItem('products', productsClicked);
+        //}
 
         var myChart = new Chart(ctx, {
             type: 'bar',
