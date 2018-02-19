@@ -18,7 +18,7 @@ Product.prototype.render = function () {
 const researchStudy = {
     products: [],
     selectedProducts: [],
-    productsClicked: [],
+    //productsClicked: [],
     start: function () {
 
         this.products.push(
@@ -131,10 +131,10 @@ const researchStudy = {
         var ctx = document.getElementById("chart").getContext('2d');
 
         const names = [];
-        //const timesClicked = [];
+        const productsClicked = [];
         for (let i = 0; i < this.products.length; i++) {
             names.push(this.products[i].name);
-            
+            productsClicked.push(researchStudy.products[i].timesClicked);
         }
 
         //console.log('times clicked', timesClicked);
@@ -145,7 +145,7 @@ const researchStudy = {
                 labels: names,
                 datasets: [{
                     label: '# of Clicks',
-                    data: this.productsClicked,
+                    data: productsClicked,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -217,6 +217,10 @@ function handleClicks() {
         boardClicked++;
     } else {
         researchStudy.clearBoard();
+        // for (let i = 0; i < researchStudy.products.length; i++) {
+        //     researchStudy.productsClicked.push(product.timesClicked);
+        // }
+
         const list = document.getElementById('list');
         for (let i = 0; i < researchStudy.products.length; i++) {
             const liEle = document.createElement('li');
@@ -230,7 +234,8 @@ function handleClicks() {
         
         if (alt === product.name) {
             product.timesClicked++;
-            researchStudy.productsClicked.push(product.timesClicked);
+            //console.log('product clicked', product.timesClicked);
+            //console.log('product pushed into array', researchStudy.productsClicked);
         }
     }
 }
